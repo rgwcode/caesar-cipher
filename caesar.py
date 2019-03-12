@@ -56,4 +56,4 @@ if op == 'e':
     outputText(encrypted_text)
 
 elif op == 'd':
-    print("Not implemented yet.")
+    decrypt("", 1)
