@@ -4,6 +4,4 @@ Usage
 
 Start it and follow the prompts.
 
-Currently supports
-- Encrypting from a file to another file
-- Decrypting a file to the standard output
+Currently encrypts and decrypts files entered by the user with a key.
