@@ -37,7 +37,7 @@ def decrypt(text, key):
             # handle overflowing for upper and lower
             if character.isupper():
                 if ord(decrypted_character) < ord("A"):
-                    decrypted_character = (chr(ord(encrypted_character) + MAX_KEY))
+                    decrypted_character = (chr(ord(decrypted_character) + MAX_KEY))
             else:
                 if ord(decrypted_character) < ord("a"):
                     decrypted_character = (chr(ord(decrypted_character) + MAX_KEY))
