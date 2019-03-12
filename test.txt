@@ -1,2 +1,0 @@
-This is a nice test text.
-Please encrypt me.

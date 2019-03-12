@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
+MIN_KEY     =   1
 MAX_KEY     =  26
 
 def operation(instruction):
-   return input(instruction).lower()
+    return input(instruction).lower()
 
 def encrypt(text, key):
     encrypted_text = ""
@@ -21,14 +22,6 @@ def encrypt(text, key):
             encrypted_text = encrypted_text + character
     return encrypted_text
 
-def getInputText(file = ""):
-    with open(filename, 'r') as f:
-        text = f.read()
-    return text
-
-def outputText(encrypted_text):
-    print("The encrypted text is:\n" + encrypted_text)
-
 def decrypt(text, key):
     decrypted_text = ""
     for character in text:
@@ -46,6 +39,32 @@ def decrypt(text, key):
             decrypted_text = decrypted_text + character
     return decrypted_text
 
+def getTextFromFile(filename, prompt = "Please enter the text file to be used: "):
+    while True:
+        try:
+            filename = input(prompt)
+            with open(filename, 'r') as file:
+                text = file.read()
+                return text
+        except FileNotFoundError:
+            print("That file does not exist. Please try again.")
+
+def getKey(prompt = "Please enter the key: "):
+    while True:
+        try:
+            key = int(input(prompt))
+            if key >= MIN_KEY and key <= MAX_KEY:
+                return key
+            else:
+                raise ValueError
+        except ValueError:
+            print(f"Error: Please enter a number between {MIN_KEY} and {MAX_KEY}.")
+
+def saveToFile(filename, prompt = "Please enter the file name to save to: "):
+    filename = input(prompt)
+    with open(filename, 'w') as f:
+        f.write(text)
+
 print("-Caesar Cipher Testprogram-")
 print("-Choose the operation to be performed-")
 
@@ -55,26 +74,13 @@ while not(op == 'e' or op == 'd'):
     op = operation("Type e for encrypting a file, d for decrypting ")
 
 if op == 'e':
-    print("Encrypting.")
-    key = int(input("Type in key: "))
-
-    whole_text = ""
-    while whole_text == "":
-        try:
-            filename = input("Type the path to a text file to encrypt: ")
-            whole_text = getInputText(filename)
-        except:
-            print("That file does not exist. Please try again.")
-
-    encrypted_text = encrypt(whole_text, key)
-    outputText(encrypted_text)
-    filename = input("Enter file name to save encrypted text to: ")
-    with open(filename, 'w') as f:
-        f.write(encrypted_text)
+    key = getKey()
+    text = getTextFromFile(key)
+    text = encrypt(text, key)
+    saveToFile(text)
 
 elif op == 'd':
-    filename = input("Type the path to the text file to decrypt: ")
-    with open(filename, 'r') as f:
-        text = f.read()
-    print(text)
-    print(decrypt(text, 13))
+    key = getKey()
+    text = getTextFromFile(key)
+    text = decrypt(text, key)
+    saveToFile(text)
