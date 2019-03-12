@@ -2,4 +2,8 @@ Implementing a caesar cipher in python
 
 Usage
 
-Start it, give it a filename and the results will be printed to the console.
+Start it and follow the prompts.
+
+Currently supports
+- Encrypting from a file to another file
+- Decrypting a file to the standard output
