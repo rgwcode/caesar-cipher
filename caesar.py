@@ -30,7 +30,21 @@ def outputText(encrypted_text):
     print("The encrypted text is:\n" + encrypted_text)
 
 def decrypt(text, key):
-    pass
+    decrypted_text = ""
+    for character in text:
+        if character.isalpha():
+            decrypted_character = (chr(ord(character) - key))
+            # handle overflowing for upper and lower
+            if character.isupper():
+                if ord(decrypted_character) < ord("A"):
+                    decrypted_character = (chr(ord(encrypted_character) + MAX_KEY))
+            else:
+                if ord(decrypted_character) < ord("a"):
+                    decrypted_character = (chr(ord(decrypted_character) + MAX_KEY))
+            decrypted_text = decrypted_text + decrypted_character
+        else:
+            decrypted_text = decrypted_text + character
+    return decrypted_text
 
 print("-Caesar Cipher Testprogram-")
 print("-Choose the operation to be performed-")
@@ -56,4 +70,8 @@ if op == 'e':
     outputText(encrypted_text)
 
 elif op == 'd':
-    decrypt("", 1)
+    filename = input("Type the path to the text file to decrypt: ")
+    with open(filename, 'r') as f:
+        text = f.read()
+    print(text)
+    print(decrypt(text, 13))
