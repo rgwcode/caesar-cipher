@@ -54,6 +54,9 @@ if op == 'e':
 
     encrypted_text = encrypt(whole_text, key)
     outputText(encrypted_text)
+    filename = input("Enter file name to save encrypted text to: ")
+    with open(filename, 'w') as f:
+        f.write(encrypted_text)
 
 elif op == 'd':
     print("Not implemented yet.")
