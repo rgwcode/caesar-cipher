@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 MIN_KEY     =   1
-MAX_KEY     =  26
+MAX_KEY     =  25
 
 def operation(instruction):
     return input(instruction).lower()
